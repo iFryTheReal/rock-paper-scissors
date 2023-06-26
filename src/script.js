@@ -42,18 +42,41 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "PAPER" && computerSelection === "ROCK") ||
     (playerSelection === "SCISSORS" && computerSelection === "PAPER")
   ) {
+    playerScore++;
     return `You won! ${playerSelection} beats ${computerSelection}`;
   } else {
+    computerScore++;
     return `You lose! ${computerSelection} beats ${playerSelection}`;
   }
 }
 
-const computer = getComputerChoice();
-const player = getPlayerChoice();
+function game() {
+  let computer;
+  let player;
+  for (let index = 1; index <= 5; index++) {
+    console.log(`Round n°${index}`);
 
-console.log(computer);
-console.log(player);
+    computer = getComputerChoice();
 
-if (player !== -1) {
-  console.log(playRound(player, computer));
+    do {
+      player = getPlayerChoice();
+    } while (player === -1);
+
+    console.log(playRound(player, computer));
+
+    console.log(`Player : ${playerScore} | Computer : ${computerScore}`);
+  }
+}
+
+let computerScore = 0;
+let playerScore = 0;
+
+game();
+
+if (playerScore > computerScore) {
+  console.log("Player won!");
+} else if (playerScore < computerScore) {
+  console.log("Computer won!");
+} else {
+  console.log("Computer won!");
 }
