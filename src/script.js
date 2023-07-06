@@ -1,5 +1,7 @@
 function getComputerChoice() {
+  // Generation d'un nombre entier aleatoire  0<= n < 3
   let randomNumber = Math.floor(Math.random() * 3);
+
   switch (randomNumber) {
     case 0:
       return "ROCK";
@@ -71,8 +73,10 @@ function game() {
 let computerScore = 0;
 let playerScore = 0;
 
-game();
+// Game loop
+//game();
 
+// Display winner
 if (playerScore > computerScore) {
   console.log("Player won!");
 } else if (playerScore < computerScore) {
