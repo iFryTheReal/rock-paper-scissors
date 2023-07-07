@@ -54,24 +54,20 @@ function playRound(playerSelection, computerSelection) {
 
   playerScoreDiv.textContent = `${playerScore}`;
   computerScoreDiv.textContent = `${computerScore}`;
+
+  checkWinner();
 }
 
-function game() {
-  let computer;
-  let player;
-  for (let index = 1; index <= 5; index++) {
-    console.log(`Round n°${index}`);
+function checkWinner() {
+  if (playerScore >= 5) {
+    roundResult.style.color = "green";
+    roundResult.textContent = `Player won!`;
+  } else if (computerScore >= 5) {
+    roundResult.style.color = "red";
+    roundResult.textContent = `Computer won!`;
+  } else return;
 
-    computer = getComputerChoice();
-
-    do {
-      player = getPlayerChoice();
-    } while (player === -1);
-
-    console.log(playRound(player, computer));
-
-    console.log(`Player : ${playerScore} | Computer : ${computerScore}`);
-  }
+  hideButtons();
 }
 
 function initialize() {
@@ -81,6 +77,20 @@ function initialize() {
   playerScoreDiv.textContent = `${playerScore}`;
   computerScoreDiv.textContent = `${computerScore}`;
   roundResult.textContent = "";
+
+  showButtons();
+}
+
+function hideButtons() {
+  btnRock.style.display = "none";
+  btnPaper.style.display = "none";
+  btnScissors.style.display = "none";
+}
+
+function showButtons() {
+  btnRock.style.display = "inline";
+  btnPaper.style.display = "inline";
+  btnScissors.style.display = "inline";
 }
 
 let computerScore;
@@ -102,15 +112,3 @@ btnScissors.addEventListener("click", () => playRound("SCISSORS", getComputerCho
 btnReset.addEventListener("click", initialize);
 
 initialize();
-
-// Game loop
-//game();
-
-// Display winner
-/* if (playerScore > computerScore) {
-  console.log("Player won!");
-} else if (playerScore < computerScore) {
-  console.log("Computer won!");
-} else {
-  console.log("Computer won!");
-} */
