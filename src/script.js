@@ -37,19 +37,29 @@ function getPlayerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+  const roundResult = document.getElementById("round-result");
+  const playerScoreDiv = document.querySelector("#score .player");
+  const computerScoreDiv = document.querySelector("#score .computer");
+
   if (playerSelection === computerSelection) {
-    return "Draw !";
+    roundResult.style.color = "black";
+    roundResult.textContent = "Draw!";
   } else if (
     (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
     (playerSelection === "PAPER" && computerSelection === "ROCK") ||
     (playerSelection === "SCISSORS" && computerSelection === "PAPER")
   ) {
     playerScore++;
-    return `You won! ${playerSelection} beats ${computerSelection}`;
+    roundResult.style.color = "green";
+    roundResult.textContent = `You won! ${playerSelection} beats ${computerSelection}`;
   } else {
     computerScore++;
-    return `You lose! ${computerSelection} beats ${playerSelection}`;
+    roundResult.style.color = "red";
+    roundResult.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
   }
+
+  playerScoreDiv.textContent = `${playerScore}`;
+  computerScoreDiv.textContent = `${computerScore}`;
 }
 
 function game() {
@@ -75,6 +85,19 @@ let playerScore = 0;
 
 // Game loop
 //game();
+
+btnRock = document.getElementById("rock");
+btnRock.addEventListener("click", () => playRound("ROCK", getComputerChoice()));
+
+btnPaper = document.getElementById("paper");
+btnPaper.addEventListener("click", () =>
+  playRound("PAPER", getComputerChoice())
+);
+
+btnScissors = document.getElementById("scissors");
+btnScissors.addEventListener("click", () =>
+  playRound("SCISSORS", getComputerChoice())
+);
 
 // Display winner
 if (playerScore > computerScore) {
