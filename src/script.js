@@ -19,9 +19,7 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-  let playerChoice = prompt(
-    "Choose your weapon (type in rock, paper or scissors)"
-  );
+  let playerChoice = prompt("Choose your weapon (type in rock, paper or scissors)");
 
   if (
     playerChoice === null ||
@@ -37,10 +35,6 @@ function getPlayerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  const roundResult = document.getElementById("round-result");
-  const playerScoreDiv = document.querySelector("#score .player");
-  const computerScoreDiv = document.querySelector("#score .computer");
-
   if (playerSelection === computerSelection) {
     roundResult.style.color = "black";
     roundResult.textContent = "Draw!";
@@ -80,30 +74,43 @@ function game() {
   }
 }
 
-let computerScore = 0;
-let playerScore = 0;
+function initialize() {
+  computerScore = 0;
+  playerScore = 0;
+
+  playerScoreDiv.textContent = `${playerScore}`;
+  computerScoreDiv.textContent = `${computerScore}`;
+  roundResult.textContent = "";
+}
+
+let computerScore;
+let playerScore;
+
+// Getting DOM elements
+const roundResult = document.getElementById("round-result");
+const playerScoreDiv = document.querySelector("#score .player");
+const computerScoreDiv = document.querySelector("#score .computer");
+const btnRock = document.getElementById("rock");
+const btnPaper = document.getElementById("paper");
+const btnScissors = document.getElementById("scissors");
+const btnReset = document.getElementById("reset");
+
+// Binding events
+btnRock.addEventListener("click", () => playRound("ROCK", getComputerChoice()));
+btnPaper.addEventListener("click", () => playRound("PAPER", getComputerChoice()));
+btnScissors.addEventListener("click", () => playRound("SCISSORS", getComputerChoice()));
+btnReset.addEventListener("click", initialize);
+
+initialize();
 
 // Game loop
 //game();
 
-btnRock = document.getElementById("rock");
-btnRock.addEventListener("click", () => playRound("ROCK", getComputerChoice()));
-
-btnPaper = document.getElementById("paper");
-btnPaper.addEventListener("click", () =>
-  playRound("PAPER", getComputerChoice())
-);
-
-btnScissors = document.getElementById("scissors");
-btnScissors.addEventListener("click", () =>
-  playRound("SCISSORS", getComputerChoice())
-);
-
 // Display winner
-if (playerScore > computerScore) {
+/* if (playerScore > computerScore) {
   console.log("Player won!");
 } else if (playerScore < computerScore) {
   console.log("Computer won!");
 } else {
   console.log("Computer won!");
-}
+} */
